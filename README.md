@@ -11,28 +11,40 @@ For more understanding here is an encoder schematic :
 For this application, I used the PID controller both for speed and position control.</br>
 Here is the block diagram of the application implemented on the STM board:
 ~~~
-                               _ _ _ _ _ _ _ _ _ _ _ _ _ _ _                 _ _ _ _ _ _ _ _ _ _ 
-  Ref_Speed(k)         Err    |                             |   Voltage     |                   | output
-  --------------(+ _ )------->|  PID Block (Speed Control)  |-------------->|  DC Motor Plant   |------------------------>
-                   ^          |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _|               |_ _ _ _ _ _ _ _ _ _|          |
-                   |                                                                                       |
-                   |                                                                                       |
-                   |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _|
+                               _ _ _ _ _ _ _ _ _ _ _ _ _ _ _              _ _ _ _ _ _ _ _ _ _ 
+  Ref_Velocity(k)      Err    |       PID Block             | Voltage    |                   | output
+  --------------(+ _ )------->|    (Velocity Control)       |----------->|  DC Motor Plant   |---------->
+                   ^          |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _|            |_ _ _ _ _ _ _ _ _ _|      |
+                   |                                                                                |
+                   |                                                                                |
+                   |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _|
 
                                                     ~Speed Control~
 ~~~
 
 ~~~
-                               _ _ _ _ _ _ _ _ _ _ _ _ _ _ _                 _ _ _ _ _ _ _ _ _ _ 
-  Ref_Position         Err    |                             |   Voltage     |                   | output
-  --------------(+ _ )------->|  PID Block (Pos Control)    |-------------->|  DC Motor Plant   |------------------------>
-                   ^          |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _|               |_ _ _ _ _ _ _ _ _ _|          |
-                   |                                                                                       |
-                   |                                                                                       |
-                   |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _|
+                               _ _ _ _ _ _ _ _ _ _ _ _ _ _            _ _ _ _ _ _ _ _ _ _ 
+  Ref_Position         Err    |                           | Voltage  |                   | output
+  --------------(+ _ )------->|  PID Block (Pos Control)  |--------->|  DC Motor Plant   |-------->
+                   ^          |_ _ _ _ _ _ _ _ _ _ _ _ _ _|          |_ _ _ _ _ _ _ _ _ _|      |
+                   |                                                                            |
+                   |                                                                            |
+                   |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _|
 
                                                     ~Position Control~
 ~~~
 
+~~~
+                               _ _ _ _ _ _ _ _  _                _ _ _ _ _ _ _ _ _             _ _ _ _ _ _ _ _
+  Ref_Position         Err    |     PID Block    | Ref_Velocity |    PID Block 2  | Voltage   |    DC Motor   | Output
+  --------------(+ _ )------->|   (Pos Control)  |--(+ _  )---->| (Speed Control) |---------->|      Plant    |------------>
+                   ^          |_ _ _ _ _ _ _ _ __|     ^        |_ _ _ _ _ _ _ _ _|           |_ _ _ _ _ _ _ _|    |   |
+                   |                                   |                                                           |   |
+                                                       |                                                           |   |
+                   |                                   |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|   |
+                   |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
+
+                                                    ~Position & speed Control~
+~~~
 
 
