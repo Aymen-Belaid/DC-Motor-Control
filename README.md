@@ -9,7 +9,7 @@ For more understanding here is an encoder schematic :
 ><img src="https://www.orientalmotor.com/images/servo-motors/servo-motor-incremental-encoder.jpg" width="300" height="200"><br/>
 
 For this application, I used the PID controller both for speed and position control.</br>
-Here is the block diagram of the application implemented on the STM board:
+Here is the block diagrams of the application implemented on the STM board:
 ~~~
                                _ _ _ _ _ _ _ _ _ _ _ _ _ _ _              _ _ _ _ _ _ _ _ _ _ 
   Ref_Velocity(k)      Err    |       PID Block             | Voltage    |                   | output
